@@ -22,6 +22,7 @@ def load_post_data_view(request, max_idx):
             "title": post.title,
             "body": post.body,
             "liked": True if request.user in post.liked.all() else False,
+            "like_count": post.like_count, 
             "author": post.author.user.username
         }
         data.append(item)

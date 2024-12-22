@@ -27,7 +27,7 @@ const getData = () => {
                                 <div class="row">
                                     <div class="col d-flex justify-content-start">
                                         <a href="#" class="btn btn-primary me-2">Details</a>
-                                        <a href="#" class="btn btn-primary">Like</a>
+                                        <a href="#" class="btn btn-primary">${el.liked ? `Unlike (${el.like_count})`: `Like (${el.like_count})`}</a>
                                     </div>
                                 </div>
                             </div>
