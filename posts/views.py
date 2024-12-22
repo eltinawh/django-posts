@@ -9,7 +9,11 @@ def post_list_and_create(request):
     print(posts.count())
     return render(request, "posts/main.html", {"posts": posts})
 
-def load_post_data_view(request):
+def load_post_data_view(request, max_idx):
+    num_visible = 3
+    min_idx = max_idx - num_visible
+    size = Post.objects.count()
+    
     posts = Post.objects.all()
     data = []
     for post in posts:
@@ -17,10 +21,8 @@ def load_post_data_view(request):
             "id": post.id,
             "title": post.title,
             "body": post.body,
+            "liked": True if request.user in post.liked.all() else False,
             "author": post.author.user.username
         }
         data.append(item)
-    return JsonResponse({"data": data})
-
-def hello_world_view(request):
-    return JsonResponse({'text': 'hello world x2'})
+    return JsonResponse({"data": data[min_idx: max_idx], "size": size})
